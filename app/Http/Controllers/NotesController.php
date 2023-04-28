@@ -24,7 +24,8 @@ class NotesController extends Controller
      */
     public function create()
     {
-        //
+        $isEdit = false;
+        return view('notes.create-edit', compact(['isEdit']));
     }
 
     /**
@@ -35,7 +36,21 @@ class NotesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+
+        $request->validate(
+            [
+                "title"=>"required",
+                "description"=>"required",
+            ]
+        );
+
+        $note = new Note();
+        $note->title = $request->title;
+        $note->description = $request->description;
+        $note->save();
+
+        return redirect(route('notes.show', $note->id));
     }
 
     /**
