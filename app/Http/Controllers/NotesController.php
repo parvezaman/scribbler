@@ -81,6 +81,8 @@ class NotesController extends Controller
      */
     public function destroy(Note $note)
     {
-        //
+        // dd($note); // to see the var dump we use dd function
+        $note->delete();
+        return redirect(route('home'));
     }
 }
