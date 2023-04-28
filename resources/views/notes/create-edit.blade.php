@@ -7,14 +7,18 @@
                 <div class="card">
                     <div class="card-header">{{ __('Note') }}</div>
                     <div class="card-body">
-                        <form action="{{ $isEdit ? route('notes.edit', $note->id) : route('notes.store') }}" method="POST">
+                        <form action="{{ $isEdit ? route('notes.update', $note->id) : route('notes.store') }}" method="POST">
                             @csrf
+                            @if ($isEdit)
+                                @method('PATCH')
+                            @endif
                             <div class="row mb-3">
                                 <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('Title') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="title" type="text"
-                                        class="form-control @error('title') is-invalid @enderror" name="title">
+                                        class="form-control @error('title') is-invalid @enderror" name="title"
+                                        value="{{ $isEdit ? $note->title : '' }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -23,7 +27,7 @@
 
                                 <div class="col-md-6">
                                     <textarea id="description" type="text" class="form-control @error('description') is-invalid @enderror"
-                                        name="description"></textarea>
+                                        name="description">{{ $isEdit ? $note->description : '' }}</textarea>
 
                                 </div>
                             </div>

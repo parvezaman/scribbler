@@ -24,6 +24,7 @@
                                 <textarea id="description" type="text" class="form-control" name="description" required readonly>{{ $note->description }}</textarea>
                             </div>
                         </div>
+                        <a href="{{ route('notes.edit', $note->id) }}">Edit</a>
                         <form action="{{ route('notes.destroy', $note->id) }}" method="POST">
                             @csrf {{-- csrf token is a security measure. which indicates the user is not being forced to do the work --}}
                             @method('DELETE')
