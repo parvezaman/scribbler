@@ -40,8 +40,8 @@ class NotesController extends Controller
 
         $request->validate(
             [
-                "title"=>"required",
-                "description"=>"required",
+                "title"=>"required|min:4|unique:notes,title",
+                "description"=>"required|min:8",
             ]
         );
 
