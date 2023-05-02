@@ -14,7 +14,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (\App\Models\Note::all() as $item)
+                        @foreach ($notes as $item)
                             <tr>
                                 <td>{{ $item->title }}</td>
                                 <td>{{ $item->created_at }}</td>
