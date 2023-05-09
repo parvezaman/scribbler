@@ -21,6 +21,7 @@ class NotesController extends Controller
      */
     public function index()
     {
+        // dd(Auth::user()->notes);
         $notes = Note::where('user_id', Auth::user()->id)->get();
         return view('notes.index', compact(['notes']));
     }
