@@ -28,6 +28,20 @@
                                 <textarea id="description" type="text" class="form-control" name="description" required readonly>{{ $note->description }}</textarea>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label for="description"
+                                class="col-md-4 col-form-label text-md-end">{{ __('Shared with') }}</label>
+
+                            <div class="col-md-6">
+                                @foreach ($note->shared as $user)
+                                    <ul class="list-group">
+                                        <li class="list-group-item list-group-item-secondary">{{ $user->name }}</li>
+                                    </ul>
+                                @endforeach
+                            </div>
+                        </div>
+
+
                         <a href="{{ route('notes.edit', $note->id) }}">Edit</a>
                         <form action="{{ route('notes.destroy', $note->id) }}" method="POST">
                             @csrf {{-- csrf token is a security measure. which indicates the user is not being forced to do the work --}}

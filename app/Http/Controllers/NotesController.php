@@ -23,6 +23,8 @@ class NotesController extends Controller
     {
         // dd(Auth::user()->notes);
         $notes = Note::where('user_id', Auth::user()->id)->get();
+        $others = Auth::user()->shared;
+        $notes = $notes->merge($others);
         return view('notes.index', compact(['notes']));
     }
 
@@ -59,6 +61,9 @@ class NotesController extends Controller
         $note->description = $request->description;
         $note->user_id = Auth::user()->id;
         $note->save();
+
+        $note->shared()->attach($request->share);
+
 
         return redirect(route('notes.show', $note->id));
     }
@@ -107,6 +112,9 @@ class NotesController extends Controller
         $note->description = $request->description;
         $note->user_id = Auth::user()->id;
         $note->update();
+
+        $note->shared()->detach();
+        $note->shared()->attach($request->share);
 
         return redirect(route('notes.show', $note->id));
     }

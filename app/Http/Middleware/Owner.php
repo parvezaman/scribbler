@@ -19,7 +19,7 @@ class Owner
     {
         // dd($request);
         $note = $request->route('note');
-        if ($note->user_id == Auth::user()->id) {
+        if ($note->user_id == Auth::user()->id || $note->shared->contains(Auth::user())) {
             return $next($request);
         } else {
             abort('404');

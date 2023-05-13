@@ -9,6 +9,7 @@
                     <thead>
                         <tr>
                             <td>Title</td>
+                            <td>Created By</td>
                             <td>Created At</td>
                             <td>Actions</td>
                         </tr>
@@ -17,6 +18,7 @@
                         @foreach ($notes as $item)
                             <tr>
                                 <td>{{ $item->title }}</td>
+                                <td>{{ App\Models\User::find($item->user_id)->name }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>
                                     <a href="{{ route('notes.show', $item->id) }}">Show</a>

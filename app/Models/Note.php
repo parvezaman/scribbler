@@ -13,4 +13,9 @@ class Note extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function shared()
+    {
+        return $this->belongsToMany(User::class, 'note_user');
+    }
 }
